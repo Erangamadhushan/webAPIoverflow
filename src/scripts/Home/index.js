@@ -10,10 +10,11 @@ function renderPageContent(content) {
     let rootContent = " ";
     content.forEach((ele) => {
         rootContent += `
-            <div class="my-5">
-                <div class="card">
-                    <h2 class="text-purly text-center">${ele.title}</h2>
+            <div class="my-5" >
+                <div class="card" style="min-height:300px;">
+                    <h2 class="text-purly text-center pb-2">${ele.title}</h2>
                     <p>${ele.introduction.content}</p>
+                    <button type="buton" class="btn btn-purly my-3 text-gray" onclick="findContent()">Find Our More..</button>
                 </div>
             </div>
         `;
