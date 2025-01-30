@@ -10,7 +10,7 @@ function renderPageContent(content) {
     let rootContent = " ";
     content.forEach((ele) => {
         rootContent += `
-            <div class="my-5" >
+            <div class="my-5 min-h-100" >
                 <div class="card" style="min-height:300px;">
                     <h2 class="text-purly text-center pb-2">${ele.title}</h2>
                     <p>${ele.introduction.content}</p>
