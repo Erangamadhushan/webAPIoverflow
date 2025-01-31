@@ -22,3 +22,8 @@ function renderPageContent(content) {
 
     root.innerHTML = rootContent;
 }
+
+document.querySelector('form').addEventListener("submit", (event) => {
+    event.preventDefault();
+    window.alert("Search Something here ...!");
+})

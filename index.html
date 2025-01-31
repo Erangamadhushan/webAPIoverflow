@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WebAPIoverflow</title>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <style type="text/tailwindcss">
             @theme {
@@ -11,9 +12,57 @@
             }
         </style>
     </head>
-    <body >
-        
+    <body class="bg-[#111]">
+        <div class="min-h-screen grid place-items-center">
+            <div data-aos="zoom-in" data-aos-duration="1000">
+                <form class="hidden md:block">
+                    <div>
+                        <input type="text" class="bg-white w-[80%] outline-none p-2 rounded gap-2" accesskey="k" placeholder="Alt + k"/>
+                        <input type="submit" value="Search" class="bg-amber-500 text-white p-2 w-[15%]"/>
+                    </div>
+                </form>
+                <h1 class="md:text-[6em] text-[3em]  font-bold text-amber-400">WebA<span id="rotate">P</span>Ioverflow</h1>
+                <p id="element" class="text-lg text-white text-center max-w-3xl"></p>
+            </div>
+        </div>
+        <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[20px]"/>
+        <div class="container w-[95%] md:max-w-[60%] my-20 mx-auto border border-amber-400 p-5">
+            <h2 class="text-center text-amber-400 text-4xl pb-5">Repository Expectations</h2>
+            <ul>
+                <li class="text-white py-5 hover:text-amber-400 " data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                    <p class="text-2xl">Quality and Reliability</p>
+                    <p>Every API in our repository undergoes rigorous testing and validation to ensure performance, security, and dependability.</p>
+                </li>
+                <li class="text-white py-5 hover:text-amber-400" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                    <p class="text-2xl">Clear Documentation</p>
+                    <p>Comprehensive documentation accompanies each API, including usage examples, request/response formats, and integration guidelines.</p>
+                </li>
+                <li class="text-white py-5 hover:text-amber-400" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                    <p class="text-2xl">Open Source Collaboration</p>
+                    <p>We welcome contributions from the developer community. Pull requests, issue reports, and suggestions are encouraged.</p>
+                </li>
+                <li class="text-white py-5 hover:text-amber-400" data-aos="zoom-in" data-aos-duration="1000"  data-aos-delay="500">
+                    <p class="text-2xl">Diverse API Categories</p>
+                    <p>Our repository covers multiple domains including data processing, authentication, communication, utility functions, and more.</p>
+                </li>
+            </ul>
+        </div>
 
+        <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[20px]"/>
+
+        <div class="container w-[95%] md:max-w-[60%] my-20 mx-auto border border-amber-400 p-5" data-aos="zoom-in" data-aos-duration="500">
+            <h2 class="text-center text-amber-400 text-4xl pb-5">Contact & Support</h2>
+            <p class="text-xl text-center text-white" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300">For questions, suggestions, or support, please open an issue in our GitHub repository or contact our maintainers directly. <a href="https://github.com/Erangamadhushan/webAPIoverflow" target="_blank" class=" text-blue-700 underline">here</a></p>
+        </div>
+
+
+
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script> AOS.init();</script>
+        <script type="text/javascript" src="./src/scripts/animations/anime.js"> </script>
+        <script type="text/javascript" src="./src//scripts/animations/typed.js"> </script>
         <script type="module" src="./src/scripts/Home/index.js"></script>
     </body>
 </html>
