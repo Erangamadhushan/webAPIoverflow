@@ -4,15 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WebAPIoverflow</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Erangamadhushan/emcss-library@1.0.1/css/style.css"/>
-        <script src="https://cdn.jsdelivr.net/gh/Erangamadhushan/emcss-library@1.0.1/js/jquery.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/Erangamadhushan/emcss-library@1.0.1/js/script.js"></script>
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <style type="text/tailwindcss">
+            @theme {
+                --color-clifford: #da373d;
+            }
+        </style>
     </head>
-    <body class="bg-white">
-        <h2 class="text-center display-4 font-bold text-purly">Web APIs Overview</h2>
-        <div class="container ">
-            <div class="grid md:col-2 lg:col-3 xl:col-4 place-items-center root"></div>
-        </div>
+    <body >
+        
 
         <script type="module" src="./src/scripts/Home/index.js"></script>
     </body>
