@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WebAPIoverflow</title>
+        <link rel="icon" type="img/x-icon" href="./src/icons/logo.jpg"/>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <style type="text/tailwindcss">
@@ -13,7 +14,15 @@
         </style>
     </head>
     <body class="bg-[#111]">
-        <div class="min-h-screen grid place-items-center">
+        <header class="fixed flex justify-between top-0 p-5 px-10 z-10 bg-[#111] w-full">
+            <div>
+                <img src="./src/icons/navlogo.jpg" class="w-[100px]"/>
+            </div>
+            <div>
+                <a href="https://github.com/Erangamadhushan/webAPIoverflow" target="_blank" class=" text-blue-700 underline"><img src="./src/icons/github.png" style="width:50px"/></a>
+            </div>
+        </header>
+        <div class="min-h-screen grid place-items-center mainContent">
             <div data-aos="zoom-in" data-aos-duration="1000">
                 <form class="hidden md:block">
                     <div>
@@ -26,7 +35,7 @@
             </div>
         </div>
         <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[20px]"/>
-        <div class="container w-[95%] md:max-w-[60%] my-20 mx-auto border border-amber-400 p-5">
+        <div class="container w-[95%] md:max-w-[70%] my-20 mx-auto border border-amber-400 p-5">
             <h2 class="text-center text-amber-400 text-4xl pb-5">Repository Expectations</h2>
             <ul>
                 <li class="text-white py-5 hover:text-amber-400 " data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
@@ -47,9 +56,9 @@
                 </li>
             </ul>
         </div>
-        <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[20px]"/>
+        <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[4em]"/>
 
-        <div class="container w-[95%] md:max-w-[60%] my-20 mx-auto border border-amber-400 p-5" data-aos="zoom-in" data-aos-duration="500">
+        <div class="container w-[95%] md:max-w-[70%] my-20 mx-auto border border-amber-400 p-5" data-aos="zoom-in" data-aos-duration="500">
             <h2 class="text-center text-amber-400 text-4xl pb-5">How to Contribute</h2>
             <p class="text-center text-amber-400 text-2xl pb-5">Interested in contributing to our repository? Follow these steps:</p>
             <ul>
@@ -73,7 +82,7 @@
 
         <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[20px]"/>
 
-        <div class="container w-[95%] md:max-w-[60%] my-20 mx-auto border border-amber-400 p-5" data-aos="zoom-in" data-aos-duration="500">
+        <div class="container w-[95%] md:max-w-[70%] my-20 mx-auto border border-amber-400 p-5" data-aos="zoom-in" data-aos-duration="500">
             <h2 class="text-center text-amber-400 text-4xl pb-5">Contact & Support</h2>
             <p class="text-xl text-center text-white" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300">For questions, suggestions, or support, please open an issue in our GitHub repository or contact our maintainers directly. <a href="https://github.com/Erangamadhushan/webAPIoverflow" target="_blank" class=" text-blue-700 underline">here</a></p>
         </div>
