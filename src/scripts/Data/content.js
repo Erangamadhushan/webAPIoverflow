@@ -139,4 +139,23 @@ export const apicontent = [
             content:"The Payment Request API provides a standard way to handle payments in web applications."
         }
     },
+];
+
+export const repositoryExpections = [
+    [
+        "Quality and Reliability",
+        "Every API in our repository undergoes rigorous testing and validation to ensure performance, security, and dependability."
+    ],
+    [
+        "Clear Documentation",
+        "Comprehensive documentation accompanies each API, including usage examples, request/response formats, and integration guidelines."
+    ],
+    [
+        "Open Source Collaboration",
+        "We welcome contributions from the developer community. Pull requests, issue reports, and suggestions are encouraged."
+    ],
+    [
+        "Diverse API Categories",
+        "Our repository covers multiple domains including data processing, authentication, communication, utility functions, and more."
+    ]
 ]
