@@ -1,7 +1,8 @@
-import {apicontent} from '../Data/content.js';
+import {apicontent, repositoryExpections} from '../Data/content.js';
 window.addEventListener("DOMContentLoaded", () => {
     renderPageContent(apicontent);
     renderIntroContent();
+    renderRepositoryExpectationContent(repositoryExpections);
 });
 
 function renderIntroContent() {
@@ -57,7 +58,20 @@ function renderPageContent(apicontents) {
     apiContentContainer.innerHTML = apiContent;
 }
 
-document.querySelector('form').addEventListener("submit", (event) => {
-    event.preventDefault();
-    window.alert("Search Something here ...!");
-});
+function renderRepositoryExpectationContent(repositoryExpections) {
+    const repositoryExpectionsContentContainer = document.querySelector('.repositoryExpectionsContentContainer');
+    let repositoryExpectionsContent = `
+        <h2 class="text-center text-amber-400 text-4xl pb-5">Repository Expectations</h2>
+        <ul>`;
+        repositoryExpections.forEach((repositoryExpectation, $index) => {
+            repositoryExpectionsContent += `
+            <li class="text-white py-5 hover:text-amber-400 " data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                <p class="text-2xl">${repositoryExpectation[0]}</p>
+                <p>${repositoryExpectation[1]}</p>
+                <p></p>
+            </li>
+        `;
+        });
+        repositoryExpectionsContent += `</ul>`;
+    repositoryExpectionsContentContainer.innerHTML = repositoryExpectionsContent;
+}
