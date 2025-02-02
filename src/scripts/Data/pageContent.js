@@ -64,7 +64,7 @@ export const pageContent = [
                 ],
             },
             {
-                title: "",
+                title: "SpeechSynthesis",
                 sub_interfaces: [
                     {
                         title: "SpeechSynthesis",
