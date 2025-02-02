@@ -16,10 +16,10 @@
     <body class="bg-[#111]">
         <header class="fixed flex justify-between top-0 p-5 px-10 z-10 bg-[#111] w-full">
             <div>
-                <img src="./src/icons/navlogo.jpg" class="w-[100px]"/>
+                <img src="./src/icons/navlogo.jpg" alt="navigation logo" class="w-[100px]"/>
             </div>
             <div>
-                <a href="https://github.com/Erangamadhushan/webAPIoverflow" target="_blank" class=" text-blue-700 underline"><img src="./src/icons/github.png" style="width:50px"/></a>
+                <a href="./content.html" target="_blank" class=" text-blue-700 underline" title="github repository"><img src="./src/icons/github.png" style="width:50px"/></a>
             </div>
         </header>
         <div class="min-h-screen grid place-items-center mainContent">
@@ -33,6 +33,12 @@
                 <h1 class="md:text-[6em] text-[3em]  font-bold text-amber-400">WebA<span id="rotate">P</span>Ioverflow</h1>
                 <p id="element" class="text-lg text-white text-center max-w-3xl"></p>
             </div>
+        </div>
+
+        <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[4em]"/>
+        <div class=" w-[95%] md:max-w-[80%] my-20 mx-auto grid grid-cols-1  p-5 introContainer"></div>
+        <div class=" w-[95%] md:max-w-[80%] my-20 mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-5 apiContentContainer" data-aos="zoom-in" data-aos-duration="500">
+            <!-- This content will be loaded by index.js-->
         </div>
         <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[20px]"/>
         <div class="container w-[95%] md:max-w-[70%] my-20 mx-auto border border-amber-400 p-5">
@@ -56,12 +62,7 @@
                 </li>
             </ul>
         </div>
-        <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[4em]"/>
-        <div class=" w-[95%] md:max-w-[80%] my-20 mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-5 apiContentContainer" data-aos="zoom-in" data-aos-duration="500">
-            <!-- This content will be loaded by index.js-->
-        </div>
-
-
+        
         <hr class="bg-amber-400 w-[75%] mx-auto py-[2px] mb-[4em]"/>
         <div class="container w-[95%] md:max-w-[70%] my-20 mx-auto border border-amber-400 p-5" data-aos="zoom-in" data-aos-duration="500">
             <h2 class="text-center text-amber-400 text-4xl pb-5">How to Contribute</h2>
@@ -101,6 +102,7 @@
         <script type="text/javascript" src="./src/scripts/animations/anime.js"> </script>
         <script type="text/javascript" src="./src//scripts/animations/typed.js"> </script>
         <script type="module" src="./src/scripts/Home/index.js"></script>
+        <script type="text/javascript" src="./src/scripts/Home/actions.js"></script>
     </body>
 </html>
 <!-- End the index.html file-->
