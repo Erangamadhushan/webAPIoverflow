@@ -5,6 +5,7 @@ export const pageContent = [
         usage: [
             {
                 title: "Speech Recognition",
+                introduction: "The Speech Recognition API enables web applications to convert spoken audio to text directly in the browser. It provides real-time speech recognition capabilities with support for multiple languages and continuous recognition modes.",
                 content: [
                     "Voice command interfaces",
                     "Real - time transcription",
@@ -14,6 +15,7 @@ export const pageContent = [
             },
             {
                 title: "Speech Synthesis",
+                introduction: "The Speech Synthesis API (also known as Text-to-Speech or TTS) allows web applications to generate synthetic speech from text. It provides various voices, languages, and control over speech parameters.",
                 content: [
                     "Web accessibility",
                     "Voice feedback",
@@ -22,9 +24,94 @@ export const pageContent = [
                 ],
             },
         ],
-        Requirement: {
-
-        },
+        interface_mode: 1,
+        interfaces: [
+            {
+                title: "Speech Recognition",
+                sub_interfaces: [
+                    {
+                        title: "SpeechRecognition",
+                        content: "The controller interface for the recognition service; this also handles the SpeechRecognitionEvent sent from the recognition service.",
+                    },
+                    {
+                        title: "SpeechRecognitionAlternative",
+                        content: "Represents a single word that has been recognized by the speech recognition service.",
+                    },
+                    {
+                        title: "SpeechRecognitionErrorEvent",
+                        content: "Represents error messages from the recognition service.",
+                    },
+                    {
+                        title: "SpeechRecognitionEvent",
+                        content: "The event object for the result and nomatch events, and contains all the data associated with an interim or final speech recognition result.",
+                    },
+                    {
+                        title: "SpeechGrammar",
+                        content: "The words or patterns of words that we want the recognition service to recognize.",
+                    },
+                    {
+                        title: "SpeechGrammarList",
+                        content: "Represents a list of SpeechGrammar objects.",
+                    },
+                    {
+                        title: "SpeechRecognitionResult",
+                        content: "Represents a single recognition match, which may contain multiple SpeechRecognitionAlternative objects.",
+                    },
+                    {
+                        title: "SpeechRecognitionResultList",
+                        content: "Represents a list of SpeechRecognitionResult objects, or a single one if results are being captured in continuous mode.",
+                    },
+                ],
+            },
+            {
+                title: "",
+                sub_interfaces: [
+                    {
+                        title: "SpeechSynthesis",
+                        content: "The controller interface for the speech service; this can be used to retrieve information about the synthesis voices available on the device, start and pause speech, and other commands besides.",
+                    },
+                    {
+                        title: "SpeechSynthesisErrorEvent",
+                        content: "Contains information about any errors that occur while processing SpeechSynthesisUtterance objects in the speech service.",
+                    },
+                    {
+                        title: "SpeechSynthesisEvent",
+                        content: "Contains information about the current state of SpeechSynthesisUtterance objects that have been processed in the speech service.",
+                    },
+                    {
+                        title: "SpeechSynthesisUtterance",
+                        content: "Represents a speech request.It contains the content the speech service should read and information about how to read it(e.g.language, pitch and volume.)",
+                    },
+                    {
+                        title: "SpeechSynthesisVoice",
+                        content: "Represents a voice that the system supports.Every SpeechSynthesisVoice has its own relative speech service including information about language, name and URI.",
+                    },
+                    {
+                        title: "Window.speechSynthesis",
+                        content: " Specified out as part of a [NoInterfaceObject] interface called SpeechSynthesisGetter, and Implemented by the Window object, the speechSynthesis property provides access to the SpeechSynthesis controller, and therefore the entry point to speech synthesis functionality.",
+                    },
+                ],
+            }
+        ],
+        requirements: [
+            {
+                title: "Speech Recognition",
+                content: [
+                    "Google Chrome 33 +",
+                    "Microsoft Edge 79 +",
+                    "Safari 14.1 +",
+                    "Firefox(requires enabling flat)",
+                ],
+            },
+            {
+                title: "Technical Requirements",
+                content: [
+                    "HTTPS connection(required for production)",
+                    "Microphone access permission",
+                    "Stable internet connection(for cloud - based recognition)",
+                ],
+            },
+        ],
     },
     {
         title: "Web Storage API",
@@ -43,7 +130,11 @@ export const pageContent = [
                 ],
             },
         ],
-        Requirement: {
+        interface_mode: 2,
+        interfaces: {
+
+        },
+        requirements: {
 
         },
     },
@@ -61,7 +152,10 @@ export const pageContent = [
                 ],
             },
         ],
-        Requirement: {
+        interfaces: {
+
+        },
+        requirements: {
 
         },
     },
@@ -82,7 +176,10 @@ export const pageContent = [
                 ],
             },
         ],
-        Requirement: {
+        interfaces: {
+
+        },
+        requirements: {
 
         },
     },
