@@ -6,18 +6,12 @@ export const apicontent = [
             content:"The Web Speech API enables web applications to recognize speech (Speech Recognition) and convert text to speech (Speech Synthesis). It allows developers to create voice-driven applications."
         }
     },
+    
     {
-        title:"Web Storage API (localStorage)",
+        title:"Web Storage API ",
         introduction:{
             title:"Introduction",
-            content:"localStorage provides a way to store data persistently in a user's browser. Data stored using localStorage does not expire unless manually deleted."
-        }
-    },
-    {
-        title:"Web Storage API (sessionStorage)",
-        introduction:{
-            title:"Introduction",
-            content:"sessionStorage stores data for the duration of a page session. Data is cleared when the page is closed."
+            content:"The Web Storage API provides mechanisms by which browsers can store key/value pairs, in a much more intuitive fashion than using cookies."
         }
     },
     {
