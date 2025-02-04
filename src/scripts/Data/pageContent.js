@@ -24,7 +24,6 @@ export const pageContent = [
                 ],
             },
         ],
-        interface_mode: 1,
         interfaces: [
             {
                 title: "Speech Recognition",
@@ -115,28 +114,88 @@ export const pageContent = [
     },
     {
         title: "Web Storage API",
-        introduction: "The Web Storage API is a browser-based mechanism that enables web applications to store key-value pairs locally within a user's browser, providing a persistent, secure method for saving data client-side. Unlike traditional cookies, Web Storage offers larger storage capacities, better performance, and more granular control, with two primary storage mechanisms: localStorage for long-term data retention and sessionStorage for temporary data storage during a browser session.",
+        introduction: "The Web Storage API is a powerful web browser feature that allows websites to store data locally on a user's device, providing a way to save information directly in the browser without relying on server-side storage or cookies. It offers two primary storage mechanisms: localStorage and sessionStorage.",
         usage: [
             {
-                title: "LocalStorage",
+                title: "localStorage",
+                introduction: "",
                 content: [
-                    "Stores data with no expiration time. It will persist even when the browser is closed and reopened.",
-                ],
+                    "Persistent storage that remains even after the browser is closed",
+                    "Data stored is specific to the protocol and domain",
+                    "No expiration time for stored data",
+                    "Typically allows 5-10 MB of storage per domain",
+                    "Accessible across browser sessions and page reloads",
+
+
+                ]
             },
             {
-                title: "SessionStorage",
+                title: "sessionStorage",
+                introduction: "",
                 content: [
-                    "Similar to LocalStorage, but it only lasts for the duration of the page session. Data is cleared when the page is closed.",
-                ],
-            },
+                    "Temporary storage that lasts only for the duration of a browser tab/window",
+                    "Data is cleared when the tab or window is closed",
+                    "Useful for storing temporary session-specific information",
+                    "Provides isolation between different browser tabs"
+                ]
+            }
         ],
-        interface_mode: 2,
-        interfaces: {
-
-        },
-        requirements: {
-
-        },
+        interfaces: [
+            {
+                title: "Storage",
+                content: "Allows you to set, retrieve and remove data for a specific domain and storage type (session or local)."
+            },
+            {
+                title: "Window",
+                content: "The Web Storage API extends the Window object with two new properties — Window.sessionStorage and Window.localStorage — which provide access to the current domain's session and local Storage objects respectively, and a storage event handler that fires when a storage area changes (e.g., a new item is stored)."
+            },
+            {
+                title: "StorageEvent",
+                content: "The storage event is fired on a document's Window object when a storage area changes."
+            }
+        ],
+        requirements: [
+            {
+                title: "HTML5- Compatible standard",
+                content: [
+                    "Chrome: Version 4.0+",
+                    "Firefox: Version 3.5+",
+                    "Safari: Version 4.0+",
+                    "Internet Explorer: Version 8.0+",
+                    "Microsoft Edge: All versions",
+                    "Opera: Version 11.5+"
+                ]
+            },
+            {
+                title: "Technical Requirements:",
+                example: [
+                    {
+                        title: "Security Requirements",
+                        content: [
+                            "Same-origin policy enforcement",
+                            "Protocol-specific storage (https:// and http:// have separate storage)",
+                            "Domain-level isolation"
+                        ]
+                    },
+                    {
+                        title: "Storage Capacity",
+                        content: [
+                            "Minimum guaranteed storage: 5-10 MB per domain",
+                            "Varies by browser implementation",
+                            "User can increase storage limit in browser settings"
+                        ]
+                    },
+                    {
+                        title: "Data Type Restrictions",
+                        content: [
+                            "Supports only string data types",
+                            "Complex objects must be serialized using JSON",
+                            "Binary data requires base64 encoding or alternative storage methods"
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     {
         title: "Fetch API",
@@ -183,7 +242,36 @@ export const pageContent = [
 
         },
     },
-
+    /*{
+        title: "",
+        introduction: "",
+        usage: [
+            {
+                title: "",
+                introduction: "",
+                content: [],
+            },
+        ],
+        interface_mode: 1,
+        interfaces: [
+            {
+                title: "",
+                sub_interfaces: [
+                    {
+                        title: "",
+                        content: "",
+                    },
+                ],
+            },
+        ],
+        requirements: [
+            {
+                title: "Speech Recognition",
+                content: [],
+            },
+        ],
+    }, */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /*{
          title:"Web Speech API",
          introduction:{
