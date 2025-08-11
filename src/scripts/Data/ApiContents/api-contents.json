@@ -1,0 +1,289 @@
+{
+  "webApis": [
+    {
+      "name": "Web Storage API",
+      "description": "The Web Storage API provides mechanisms by which browsers can store key/value pairs locally within a user's browser, in a much more intuitive fashion than using cookies. It includes two storage mechanisms: localStorage for persistent storage and sessionStorage for session-based storage.",
+      "usage": [
+        "Storing user preferences and settings",
+        "Caching data to reduce server requests",
+        "Maintaining application state",
+        "Storing form data temporarily",
+        "Implementing offline functionality",
+        "Saving user authentication tokens"
+      ],
+      "components": [
+        {
+          "name": "localStorage",
+          "description": "Stores data with no expiration time until explicitly cleared",
+          "methods": [
+            "setItem(key, value)",
+            "getItem(key)",
+            "removeItem(key)",
+            "clear()",
+            "key(index)"
+          ]
+        },
+        {
+          "name": "sessionStorage", 
+          "description": "Stores data for the duration of the page session",
+          "methods": [
+            "setItem(key, value)",
+            "getItem(key)", 
+            "removeItem(key)",
+            "clear()",
+            "key(index)"
+          ]
+        }
+      ],
+      "sampleCode": {
+        "localStorage": {
+          "description": "Storing and retrieving data with localStorage",
+          "code": "// Store data\nlocalStorage.setItem('username', 'john_doe');\nlocalStorage.setItem('preferences', JSON.stringify({\n  theme: 'dark',\n  language: 'en'\n}));\n\n// Retrieve data\nconst username = localStorage.getItem('username');\nconst preferences = JSON.parse(localStorage.getItem('preferences'));\n\n// Remove specific item\nlocalStorage.removeItem('username');\n\n// Clear all localStorage\nlocalStorage.clear();\n\n// Check if item exists\nif (localStorage.getItem('username') !== null) {\n  console.log('Username exists');\n}"
+        },
+        "sessionStorage": {
+          "description": "Storing temporary session data",
+          "code": "// Store session data\nsessionStorage.setItem('currentTab', 'dashboard');\nsessionStorage.setItem('formData', JSON.stringify({\n  email: 'user@example.com',\n  step: 2\n}));\n\n// Retrieve session data\nconst currentTab = sessionStorage.getItem('currentTab');\nconst formData = JSON.parse(sessionStorage.getItem('formData'));\n\n// Listen for storage events\nwindow.addEventListener('storage', function(e) {\n  if (e.storageArea === sessionStorage) {\n    console.log('Session storage changed:', e.key, e.newValue);\n  }\n});"
+        },
+        "errorHandling": {
+          "description": "Proper error handling and storage limits",
+          "code": "function safeSetItem(key, value) {\n  try {\n    localStorage.setItem(key, value);\n    return true;\n  } catch (e) {\n    if (e.name === 'QuotaExceededError') {\n      console.error('Storage quota exceeded');\n      // Handle quota exceeded (clear old data, notify user, etc.)\n    } else {\n      console.error('Storage error:', e);\n    }\n    return false;\n  }\n}\n\n// Check storage availability\nfunction storageAvailable(type) {\n  try {\n    const storage = window[type];\n    const test = '__storage_test__';\n    storage.setItem(test, test);\n    storage.removeItem(test);\n    return true;\n  } catch (e) {\n    return false;\n  }\n}\n\nif (storageAvailable('localStorage')) {\n  // localStorage is available\n  safeSetItem('myData', 'value');\n}"
+        }
+      },
+      "browserSupport": "Supported in all modern browsers (IE 8+, Chrome 4+, Firefox 3.5+, Safari 4+)",
+      "limitations": [
+        "Storage limit typically 5-10MB per origin",
+        "Synchronous API can block main thread",
+        "Data stored as strings only",
+        "Not available in private/incognito mode in some browsers",
+        "Can be cleared by user or browser"
+      ]
+    },
+    {
+      "name": "Web Speech API",
+      "description": "The Web Speech API enables web applications to incorporate speech recognition (speech-to-text) and speech synthesis (text-to-speech) capabilities. It consists of two main interfaces: SpeechRecognition for converting speech to text, and SpeechSynthesis for converting text to speech.",
+      "usage": [
+        "Voice-controlled applications and interfaces",
+        "Accessibility features for visually impaired users",
+        "Voice dictation and note-taking applications",
+        "Language learning applications with pronunciation feedback",
+        "Hands-free navigation and commands",
+        "Audio content creation and narration"
+      ],
+      "components": [
+        {
+          "name": "SpeechRecognition",
+          "description": "Converts spoken words into text",
+          "properties": [
+            "continuous - whether to return continuous results",
+            "interimResults - whether to return interim results",
+            "lang - language for recognition",
+            "maxAlternatives - maximum number of alternatives"
+          ],
+          "events": [
+            "start",
+            "result", 
+            "error",
+            "end",
+            "speechstart",
+            "speechend"
+          ]
+        },
+        {
+          "name": "SpeechSynthesis",
+          "description": "Converts text into spoken words",
+          "methods": [
+            "speak(utterance)",
+            "cancel()",
+            "pause()",
+            "resume()",
+            "getVoices()"
+          ]
+        }
+      ],
+      "sampleCode": {
+        "speechRecognition": {
+          "description": "Converting speech to text",
+          "code": "// Check for browser support\nif ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {\n  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;\n  const recognition = new SpeechRecognition();\n  \n  // Configure recognition\n  recognition.continuous = true;\n  recognition.interimResults = true;\n  recognition.lang = 'en-US';\n  recognition.maxAlternatives = 1;\n  \n  // Handle results\n  recognition.onresult = function(event) {\n    let finalTranscript = '';\n    let interimTranscript = '';\n    \n    for (let i = event.resultIndex; i < event.results.length; i++) {\n      const transcript = event.results[i][0].transcript;\n      \n      if (event.results[i].isFinal) {\n        finalTranscript += transcript + ' ';\n      } else {\n        interimTranscript += transcript;\n      }\n    }\n    \n    document.getElementById('final').innerHTML = finalTranscript;\n    document.getElementById('interim').innerHTML = interimTranscript;\n  };\n  \n  // Handle errors\n  recognition.onerror = function(event) {\n    console.error('Speech recognition error:', event.error);\n  };\n  \n  // Start/stop recognition\n  document.getElementById('start').onclick = () => recognition.start();\n  document.getElementById('stop').onclick = () => recognition.stop();\n}"
+        },
+        "speechSynthesis": {
+          "description": "Converting text to speech",
+          "code": "// Check for browser support\nif ('speechSynthesis' in window) {\n  const synth = window.speechSynthesis;\n  \n  function speak(text, options = {}) {\n    // Cancel any ongoing speech\n    synth.cancel();\n    \n    // Create utterance\n    const utterance = new SpeechSynthesisUtterance(text);\n    \n    // Configure utterance\n    utterance.lang = options.lang || 'en-US';\n    utterance.rate = options.rate || 1;\n    utterance.pitch = options.pitch || 1;\n    utterance.volume = options.volume || 1;\n    \n    // Set voice if specified\n    if (options.voice) {\n      utterance.voice = options.voice;\n    }\n    \n    // Event handlers\n    utterance.onstart = () => console.log('Speech started');\n    utterance.onend = () => console.log('Speech ended');\n    utterance.onerror = (e) => console.error('Speech error:', e);\n    \n    // Speak the text\n    synth.speak(utterance);\n  }\n  \n  // Get available voices\n  function getVoices() {\n    return synth.getVoices();\n  }\n  \n  // Wait for voices to load\n  if (synth.onvoiceschanged !== undefined) {\n    synth.onvoiceschanged = () => {\n      const voices = getVoices();\n      console.log('Available voices:', voices);\n    };\n  }\n  \n  // Usage examples\n  speak('Hello, this is a test of text-to-speech!');\n  \n  speak('This is spoken slowly', { rate: 0.5 });\n  \n  speak('This has a high pitch', { pitch: 2 });\n}"
+        },
+        "voiceCommands": {
+          "description": "Creating a voice command system",
+          "code": "class VoiceCommandSystem {\n  constructor() {\n    this.commands = new Map();\n    this.isListening = false;\n    this.setupRecognition();\n  }\n  \n  setupRecognition() {\n    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {\n      console.error('Speech recognition not supported');\n      return;\n    }\n    \n    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;\n    this.recognition = new SpeechRecognition();\n    \n    this.recognition.continuous = true;\n    this.recognition.interimResults = false;\n    this.recognition.lang = 'en-US';\n    \n    this.recognition.onresult = (event) => {\n      const command = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();\n      this.processCommand(command);\n    };\n    \n    this.recognition.onerror = (event) => {\n      console.error('Recognition error:', event.error);\n    };\n  }\n  \n  addCommand(phrase, callback) {\n    this.commands.set(phrase.toLowerCase(), callback);\n  }\n  \n  processCommand(command) {\n    console.log('Heard command:', command);\n    \n    // Check for exact matches first\n    if (this.commands.has(command)) {\n      this.commands.get(command)();\n      return;\n    }\n    \n    // Check for partial matches\n    for (const [phrase, callback] of this.commands) {\n      if (command.includes(phrase)) {\n        callback();\n        return;\n      }\n    }\n    \n    console.log('Unknown command:', command);\n  }\n  \n  startListening() {\n    if (this.recognition && !this.isListening) {\n      this.recognition.start();\n      this.isListening = true;\n    }\n  }\n  \n  stopListening() {\n    if (this.recognition && this.isListening) {\n      this.recognition.stop();\n      this.isListening = false;\n    }\n  }\n}\n\n// Usage example\nconst voiceCommands = new VoiceCommandSystem();\n\n// Add commands\nvoiceCommands.addCommand('hello', () => {\n  speak('Hello! How can I help you?');\n});\n\nvoiceCommands.addCommand('time', () => {\n  const now = new Date().toLocaleTimeString();\n  speak(`The current time is ${now}`);\n});\n\nvoiceCommands.addCommand('scroll down', () => {\n  window.scrollBy(0, 300);\n});\n\n// Start listening\nvoiceCommands.startListening();"
+        }
+      },
+      "browserSupport": "Limited support - Chrome/Edge (good), Firefox (partial), Safari (minimal)",
+      "limitations": [
+        "Requires HTTPS for security",
+        "Limited browser support, especially for speech recognition",
+        "Requires user permission and interaction",
+        "Network dependency for some implementations",
+        "Privacy concerns with voice data",
+        "Accuracy varies with accents and background noise"
+      ]
+    },
+    {
+      "name": "Web Fetch API",
+      "description": "The Fetch API provides a modern, promise-based interface for making HTTP requests in web browsers. It's designed to be more powerful and flexible than the older XMLHttpRequest, offering a cleaner syntax and better support for modern web development patterns including async/await.",
+      "usage": [
+        "Making HTTP requests to REST APIs",
+        "Uploading and downloading files",
+        "Submitting form data",
+        "Implementing real-time data fetching",
+        "Building single-page applications (SPAs)",
+        "Handling authentication and authorization",
+        "Processing JSON and other data formats"
+      ],
+      "components": [
+        {
+          "name": "fetch()",
+          "description": "Main function for making network requests",
+          "parameters": [
+            "url - the URL to fetch",
+            "options - request configuration object"
+          ]
+        },
+        {
+          "name": "Request",
+          "description": "Represents a resource request",
+          "properties": [
+            "method",
+            "headers", 
+            "body",
+            "mode",
+            "credentials",
+            "cache"
+          ]
+        },
+        {
+          "name": "Response",
+          "description": "Represents the response to a request",
+          "methods": [
+            "json()",
+            "text()",
+            "blob()",
+            "arrayBuffer()",
+            "formData()"
+          ]
+        },
+        {
+          "name": "Headers",
+          "description": "Represents response/request headers",
+          "methods": [
+            "get()",
+            "set()",
+            "append()",
+            "delete()",
+            "has()"
+          ]
+        }
+      ],
+      "sampleCode": {
+        "basicGet": {
+          "description": "Basic GET request with error handling",
+          "code": "// Simple GET request\nfetch('https://api.example.com/users')\n  .then(response => {\n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    return response.json();\n  })\n  .then(data => {\n    console.log('Success:', data);\n  })\n  .catch(error => {\n    console.error('Error:', error);\n  });\n\n// Using async/await\nasync function fetchUsers() {\n  try {\n    const response = await fetch('https://api.example.com/users');\n    \n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    \n    const users = await response.json();\n    console.log('Users:', users);\n    return users;\n  } catch (error) {\n    console.error('Fetch error:', error);\n    throw error;\n  }\n}"
+        },
+        "postRequest": {
+          "description": "POST request with JSON data",
+          "code": "// POST request with JSON data\nasync function createUser(userData) {\n  try {\n    const response = await fetch('https://api.example.com/users', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n        'Authorization': 'Bearer your-token-here'\n      },\n      body: JSON.stringify(userData)\n    });\n    \n    if (!response.ok) {\n      const errorData = await response.json();\n      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);\n    }\n    \n    const result = await response.json();\n    console.log('User created:', result);\n    return result;\n  } catch (error) {\n    console.error('Create user error:', error);\n    throw error;\n  }\n}\n\n// Usage\nconst newUser = {\n  name: 'John Doe',\n  email: 'john@example.com',\n  age: 30\n};\n\ncreateUser(newUser);"
+        },
+        "fileUpload": {
+          "description": "File upload using FormData",
+          "code": "// File upload with progress tracking\nasync function uploadFile(file, onProgress) {\n  const formData = new FormData();\n  formData.append('file', file);\n  formData.append('description', 'Uploaded file');\n  \n  try {\n    const response = await fetch('https://api.example.com/upload', {\n      method: 'POST',\n      body: formData,\n      // Don't set Content-Type header - let browser set it with boundary\n    });\n    \n    if (!response.ok) {\n      throw new Error(`Upload failed! status: ${response.status}`);\n    }\n    \n    const result = await response.json();\n    console.log('Upload successful:', result);\n    return result;\n  } catch (error) {\n    console.error('Upload error:', error);\n    throw error;\n  }\n}\n\n// File download\nasync function downloadFile(url, filename) {\n  try {\n    const response = await fetch(url);\n    \n    if (!response.ok) {\n      throw new Error(`Download failed! status: ${response.status}`);\n    }\n    \n    const blob = await response.blob();\n    const downloadUrl = window.URL.createObjectURL(blob);\n    \n    const link = document.createElement('a');\n    link.href = downloadUrl;\n    link.download = filename;\n    link.click();\n    \n    window.URL.revokeObjectURL(downloadUrl);\n  } catch (error) {\n    console.error('Download error:', error);\n  }\n}"
+        },
+        "advancedFeatures": {
+          "description": "Advanced fetch features including timeout, retry, and interceptors",
+          "code": "// Fetch with timeout\nfunction fetchWithTimeout(url, options = {}, timeout = 5000) {\n  return Promise.race([\n    fetch(url, options),\n    new Promise((_, reject) => \n      setTimeout(() => reject(new Error('Request timeout')), timeout)\n    )\n  ]);\n}\n\n// Retry mechanism\nasync function fetchWithRetry(url, options = {}, maxRetries = 3) {\n  for (let i = 0; i <= maxRetries; i++) {\n    try {\n      const response = await fetch(url, options);\n      if (response.ok) {\n        return response;\n      }\n      throw new Error(`HTTP ${response.status}`);\n    } catch (error) {\n      if (i === maxRetries) {\n        throw error;\n      }\n      console.log(`Retry ${i + 1}/${maxRetries} after error:`, error.message);\n      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));\n    }\n  }\n}\n\n// Request interceptor utility\nclass FetchInterceptor {\n  constructor(baseURL = '') {\n    this.baseURL = baseURL;\n    this.requestInterceptors = [];\n    this.responseInterceptors = [];\n  }\n  \n  addRequestInterceptor(interceptor) {\n    this.requestInterceptors.push(interceptor);\n  }\n  \n  addResponseInterceptor(interceptor) {\n    this.responseInterceptors.push(interceptor);\n  }\n  \n  async fetch(url, options = {}) {\n    let finalUrl = url.startsWith('http') ? url : this.baseURL + url;\n    let finalOptions = { ...options };\n    \n    // Apply request interceptors\n    for (const interceptor of this.requestInterceptors) {\n      const result = interceptor(finalUrl, finalOptions);\n      if (result) {\n        finalUrl = result.url || finalUrl;\n        finalOptions = result.options || finalOptions;\n      }\n    }\n    \n    let response = await fetch(finalUrl, finalOptions);\n    \n    // Apply response interceptors\n    for (const interceptor of this.responseInterceptors) {\n      response = interceptor(response) || response;\n    }\n    \n    return response;\n  }\n}\n\n// Usage example\nconst api = new FetchInterceptor('https://api.example.com');\n\n// Add auth header to all requests\napi.addRequestInterceptor((url, options) => {\n  options.headers = options.headers || {};\n  options.headers.Authorization = 'Bearer ' + getAuthToken();\n  return { url, options };\n});\n\n// Log all responses\napi.addResponseInterceptor((response) => {\n  console.log('Response:', response.status, response.url);\n  return response;\n});"
+        }
+      },
+      "browserSupport": "Excellent support in all modern browsers (Chrome 42+, Firefox 39+, Safari 10.1+, Edge 14+)",
+      "limitations": [
+        "No built-in timeout mechanism",
+        "Cannot track upload progress directly",
+        "CORS restrictions for cross-origin requests",
+        "No automatic request retries",
+        "Limited control over cache behavior",
+        "Cannot cancel requests easily without AbortController"
+      ]
+    },
+    {
+      "name": "Web Geolocation API",
+      "description": "The Geolocation API allows web applications to access the user's geographical location information. It provides methods to retrieve the current position and watch for position changes, with user permission required for privacy protection.",
+      "usage": [
+        "Location-based services and mapping applications",
+        "Weather applications showing local conditions",
+        "Store locators and proximity-based features",
+        "Delivery and transportation services",
+        "Social media check-ins and location sharing",
+        "Emergency services and safety applications",
+        "Fitness and tracking applications"
+      ],
+      "components": [
+        {
+          "name": "navigator.geolocation",
+          "description": "Main geolocation object providing location services",
+          "methods": [
+            "getCurrentPosition(success, error, options)",
+            "watchPosition(success, error, options)",
+            "clearWatch(watchId)"
+          ]
+        },
+        {
+          "name": "Position",
+          "description": "Represents a geographical position",
+          "properties": [
+            "coords - coordinate information",
+            "timestamp - when position was acquired"
+          ]
+        },
+        {
+          "name": "Coordinates",
+          "description": "Contains detailed coordinate information",
+          "properties": [
+            "latitude",
+            "longitude",
+            "altitude",
+            "accuracy",
+            "altitudeAccuracy",
+            "heading",
+            "speed"
+          ]
+        },
+        {
+          "name": "PositionError",
+          "description": "Represents geolocation errors",
+          "properties": [
+            "code - error code (1-3)",
+            "message - error description"
+          ]
+        }
+      ],
+      "sampleCode": {
+        "getCurrentPosition": {
+          "description": "Getting the user's current location",
+          "code": "// Check if geolocation is supported\nif ('geolocation' in navigator) {\n  // Get current position\n  navigator.geolocation.getCurrentPosition(\n    // Success callback\n    function(position) {\n      const coords = position.coords;\n      \n      console.log('Current position:');\n      console.log(`Latitude: ${coords.latitude}`);\n      console.log(`Longitude: ${coords.longitude}`);\n      console.log(`Accuracy: ${coords.accuracy} meters`);\n      \n      // Optional properties (may be null)\n      if (coords.altitude !== null) {\n        console.log(`Altitude: ${coords.altitude} meters`);\n      }\n      \n      if (coords.speed !== null) {\n        console.log(`Speed: ${coords.speed} m/s`);\n      }\n      \n      if (coords.heading !== null) {\n        console.log(`Heading: ${coords.heading} degrees`);\n      }\n      \n      // Use the location data\n      displayLocationOnMap(coords.latitude, coords.longitude);\n    },\n    \n    // Error callback\n    function(error) {\n      let errorMessage;\n      \n      switch (error.code) {\n        case error.PERMISSION_DENIED:\n          errorMessage = 'User denied the request for geolocation.';\n          break;\n        case error.POSITION_UNAVAILABLE:\n          errorMessage = 'Location information is unavailable.';\n          break;\n        case error.TIMEOUT:\n          errorMessage = 'The request to get user location timed out.';\n          break;\n        default:\n          errorMessage = 'An unknown error occurred.';\n          break;\n      }\n      \n      console.error('Geolocation error:', errorMessage);\n      console.error('Error details:', error.message);\n    },\n    \n    // Options\n    {\n      enableHighAccuracy: true, // Use GPS if available\n      timeout: 10000, // 10 seconds timeout\n      maximumAge: 60000 // Accept cached position up to 1 minute old\n    }\n  );\n} else {\n  console.error('Geolocation is not supported by this browser.');\n}"
+        },
+        "watchPosition": {
+          "description": "Continuously tracking user's location",
+          "code": "let watchId = null;\n\nfunction startLocationTracking() {\n  if ('geolocation' in navigator) {\n    const options = {\n      enableHighAccuracy: true,\n      timeout: 5000,\n      maximumAge: 0 // Always get fresh position\n    };\n    \n    watchId = navigator.geolocation.watchPosition(\n      // Success callback - called whenever position changes\n      function(position) {\n        const coords = position.coords;\n        const timestamp = new Date(position.timestamp);\n        \n        console.log('Position update:', {\n          latitude: coords.latitude,\n          longitude: coords.longitude,\n          accuracy: coords.accuracy,\n          timestamp: timestamp.toLocaleString()\n        });\n        \n        // Update UI with new position\n        updateLocationDisplay(coords);\n        \n        // Log movement if significant change\n        if (hasSignificantMovement(coords)) {\n          logMovement(coords, timestamp);\n        }\n      },\n      \n      // Error callback\n      function(error) {\n        console.error('Watch position error:', error.message);\n        \n        // Optionally stop watching on persistent errors\n        if (error.code === error.PERMISSION_DENIED) {\n          stopLocationTracking();\n        }\n      },\n      \n      options\n    );\n    \n    console.log('Started location tracking with watch ID:', watchId);\n  } else {\n    console.error('Geolocation not supported');\n  }\n}\n\nfunction stopLocationTracking() {\n  if (watchId !== null) {\n    navigator.geolocation.clearWatch(watchId);\n    watchId = null;\n    console.log('Stopped location tracking');\n  }\n}\n\n// Helper functions\nlet lastPosition = null;\n\nfunction hasSignificantMovement(coords) {\n  if (!lastPosition) {\n    lastPosition = coords;\n    return true;\n  }\n  \n  const distance = calculateDistance(\n    lastPosition.latitude, lastPosition.longitude,\n    coords.latitude, coords.longitude\n  );\n  \n  // Consider movement significant if > 10 meters\n  if (distance > 10) {\n    lastPosition = coords;\n    return true;\n  }\n  \n  return false;\n}\n\nfunction calculateDistance(lat1, lon1, lat2, lon2) {\n  const R = 6371e3; // Earth's radius in meters\n  const φ1 = lat1 * Math.PI/180;\n  const φ2 = lat2 * Math.PI/180;\n  const Δφ = (lat2-lat1) * Math.PI/180;\n  const Δλ = (lon2-lon1) * Math.PI/180;\n  \n  const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +\n            Math.cos(φ1) * Math.cos(φ2) *\n            Math.sin(Δλ/2) * Math.sin(Δλ/2);\n  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));\n  \n  return R * c; // Distance in meters\n}\n\n// Usage\nstartLocationTracking();\n\n// Stop tracking after 5 minutes\nsetTimeout(stopLocationTracking, 5 * 60 * 1000);"
+        },
+        "locationUtils": {
+          "description": "Utility functions for working with geolocation",
+          "code": "// Geolocation utility class\nclass LocationService {\n  constructor() {\n    this.watchId = null;\n    this.lastKnownPosition = null;\n  }\n  \n  // Check if geolocation is supported\n  static isSupported() {\n    return 'geolocation' in navigator;\n  }\n  \n  // Get current position with promise interface\n  async getCurrentPosition(options = {}) {\n    return new Promise((resolve, reject) => {\n      if (!LocationService.isSupported()) {\n        reject(new Error('Geolocation is not supported'));\n        return;\n      }\n      \n      const defaultOptions = {\n        enableHighAccuracy: true,\n        timeout: 10000,\n        maximumAge: 60000\n      };\n      \n      navigator.geolocation.getCurrentPosition(\n        (position) => {\n          this.lastKnownPosition = position;\n          resolve(position);\n        },\n        reject,\n        { ...defaultOptions, ...options }\n      );\n    });\n  }\n  \n  // Start watching position\n  startWatching(callback, errorCallback, options = {}) {\n    if (!LocationService.isSupported()) {\n      if (errorCallback) errorCallback(new Error('Geolocation not supported'));\n      return null;\n    }\n    \n    const defaultOptions = {\n      enableHighAccuracy: true,\n      timeout: 5000,\n      maximumAge: 0\n    };\n    \n    this.watchId = navigator.geolocation.watchPosition(\n      (position) => {\n        this.lastKnownPosition = position;\n        if (callback) callback(position);\n      },\n      errorCallback,\n      { ...defaultOptions, ...options }\n    );\n    \n    return this.watchId;\n  }\n  \n  // Stop watching position\n  stopWatching() {\n    if (this.watchId !== null) {\n      navigator.geolocation.clearWatch(this.watchId);\n      this.watchId = null;\n      return true;\n    }\n    return false;\n  }\n  \n  // Get last known position\n  getLastKnownPosition() {\n    return this.lastKnownPosition;\n  }\n  \n  // Calculate distance between two points\n  static calculateDistance(pos1, pos2) {\n    const R = 6371e3; // Earth's radius in meters\n    const lat1 = pos1.coords ? pos1.coords.latitude : pos1.latitude;\n    const lon1 = pos1.coords ? pos1.coords.longitude : pos1.longitude;\n    const lat2 = pos2.coords ? pos2.coords.latitude : pos2.latitude;\n    const lon2 = pos2.coords ? pos2.coords.longitude : pos2.longitude;\n    \n    const φ1 = lat1 * Math.PI/180;\n    const φ2 = lat2 * Math.PI/180;\n    const Δφ = (lat2-lat1) * Math.PI/180;\n    const Δλ = (lon2-lon1) * Math.PI/180;\n    \n    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +\n              Math.cos(φ1) * Math.cos(φ2) *\n              Math.sin(Δλ/2) * Math.sin(Δλ/2);\n    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));\n    \n    return R * c;\n  }\n  \n  // Format coordinates for display\n  static formatCoordinates(position, precision = 6) {\n    const coords = position.coords || position;\n    return {\n      latitude: coords.latitude.toFixed(precision),\n      longitude: coords.longitude.toFixed(precision),\n      accuracy: coords.accuracy ? `±${Math.round(coords.accuracy)}m` : 'Unknown'\n    };\n  }\n}\n\n// Usage example\nconst locationService = new LocationService();\n\n// Get current position\ntry {\n  const position = await locationService.getCurrentPosition();\n  const formatted = LocationService.formatCoordinates(position);\n  console.log('Current location:', formatted);\n} catch (error) {\n  console.error('Failed to get location:', error.message);\n}\n\n// Watch for position changes\nlocationService.startWatching(\n  (position) => {\n    console.log('Position updated:', LocationService.formatCoordinates(position));\n  },\n  (error) => {\n    console.error('Location error:', error.message);\n  }\n);"
+        }
+      },
+      "browserSupport": "Excellent support in all modern browsers and mobile devices",
+      "limitations": [
+        "Requires user permission (privacy concern)",
+        "Accuracy varies greatly by device and environment",
+        "May not work in some indoor locations",
+        "Can be slow to acquire position",
+        "Battery drain on mobile devices",
+        "HTTPS required in many browsers",
+        "May be blocked by enterprise firewalls"
+      ]
+    }
+  ]
+}
